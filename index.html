@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taccino — Premium AI Café</title>
+  <meta name="description" content="Experience Taccino, a premium AI-powered café. Smart recommendations, elegant ambience, and exquisite coffee crafted just for you." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ════════════════ NOTIFICATION TOAST ════════════════ -->
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <!-- ════════════════ NAVBAR ════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <span class="brand-icon">☕</span>
+        <span class="brand-name">Taccino</span>
+      </div>
+      <div class="nav-links">
+        <a href="#menu" class="nav-link">Menu</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#about" class="nav-link">About</a>
+      </div>
+      <div class="nav-actions">
+        <!-- Loyalty Points -->
+        <div class="loyalty-badge" id="loyaltyBadge" title="Loyalty Points">
+          <span class="loyalty-icon">✦</span>
+          <span class="loyalty-pts" id="loyaltyPts">240</span>
+        </div>
+        <!-- Dark Mode Toggle -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <span class="theme-icon" id="themeIcon">🌙</span>
+        </button>
+        <!-- Cart -->
+        <button class="cart-btn" id="cartBtn" aria-label="Open cart">
+          <span class="cart-icon">🛍</span>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════════════ HERO ════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-content fade-in">
+      <p class="hero-eyebrow" id="timeGreeting">Good evening</p>
+      <h1 class="hero-title">Where every sip<br /><em>tells a story.</em></h1>
+      <p class="hero-subtitle">Handcrafted coffee, curated by AI — tailored perfectly to your mood.</p>
+      <div class="hero-cta">
+        <a href="#menu" class="btn btn-primary">Explore Menu</a>
+        <button class="btn btn-ghost" id="aiWelcomeBtn">Ask AI Waiter</button>
+      </div>
+    </div>
+    <div class="hero-badge fade-in-delay">
+      <div class="badge-inner">
+        <span class="badge-text">AI Powered</span>
+        <span class="badge-sub">Personalized for you</span>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Scroll to explore</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ════════════════ MENU SECTION ════════════════ -->
+  <section class="section" id="menu">
+    <div class="section-header fade-in">
+      <p class="section-eyebrow">Our Selection</p>
+      <h2 class="section-title">Crafted with care,<br /><em>served with elegance.</em></h2>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="category-filters fade-in" id="categoryFilters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="coffee">Coffee</button>
+      <button class="filter-btn" data-filter="cold">Cold Drinks</button>
+      <button class="filter-btn" data-filter="snacks">Snacks</button>
+      <button class="filter-btn" data-filter="specials">Specials</button>
+    </div>
+
+    <!-- AI Suggestion Banner -->
+    <div class="ai-suggestion-bar fade-in" id="aiSuggestionBar">
+      <span class="ai-badge">✦ AI Pick</span>
+      <span class="ai-suggestion-text" id="aiSuggestionText">Try our Signature Espresso — perfect for a late-night focus session.</span>
+    </div>
+
+    <!-- Menu Cards -->
+    <div class="menu-grid" id="menuGrid">
+      <!-- Cards are injected by JS -->
+    </div>
+  </section>
+
+  <!-- ════════════════ EXPERIENCE SECTION ════════════════ -->
+  <section class="section experience-section" id="experience">
+    <div class="section-header fade-in">
+      <p class="section-eyebrow">The Taccino Way</p>
+      <h2 class="section-title">A refined experience,<br /><em>reimagined.</em></h2>
+    </div>
+    <div class="experience-grid fade-in">
+      <div class="exp-card">
+        <div class="exp-icon">🤖</div>
+        <h3>AI Waiter</h3>
+        <p>Your personal AI barista suggests drinks based on your mood, time of day, and past preferences.</p>
+      </div>
+      <div class="exp-card">
+        <div class="exp-icon">🎯</div>
+        <h3>Smart Suggestions</h3>
+        <p>Machine learning understands your palate and curates the perfect combination every visit.</p>
+      </div>
+      <div class="exp-card">
+        <div class="exp-icon">✦</div>
+        <h3>Loyalty Rewards</h3>
+        <p>Every order earns Taccino Points redeemable for exclusive drinks, merch, and experiences.</p>
+      </div>
+      <div class="exp-card">
+        <div class="exp-icon">📦</div>
+        <h3>Live Tracking</h3>
+        <p>Watch your order journey from the barista's hands to your table in real time.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ ORDER TRACKING ════════════════ -->
+  <div class="order-tracker-section fade-in" id="orderTrackerSection" style="display:none;">
+    <div class="tracker-header">
+      <h3 class="tracker-title">Your Order</h3>
+      <button class="tracker-close" id="trackerClose">✕</button>
+    </div>
+    <div class="tracker-steps" id="trackerSteps">
+      <div class="tracker-step active" data-step="0">
+        <div class="step-dot"></div>
+        <span>Received</span>
+      </div>
+      <div class="tracker-step" data-step="1">
+        <div class="step-dot"></div>
+        <span>Preparing</span>
+      </div>
+      <div class="tracker-step" data-step="2">
+        <div class="step-dot"></div>
+        <span>Ready</span>
+      </div>
+      <div class="tracker-step" data-step="3">
+        <div class="step-dot"></div>
+        <span>Served ✓</span>
+      </div>
+    </div>
+    <div class="tracker-progress-bar">
+      <div class="tracker-progress-fill" id="trackerFill"></div>
+    </div>
+    <button class="btn btn-outline btn-sm" id="advanceOrderBtn">Advance Status (Staff)</button>
+  </div>
+
+  <!-- ════════════════ ABOUT ════════════════ -->
+  <section class="section about-section" id="about">
+    <div class="about-inner fade-in">
+      <div class="about-text">
+        <p class="section-eyebrow">Our Story</p>
+        <h2 class="section-title">Born from a love<br /><em>of perfect coffee.</em></h2>
+        <p class="about-desc">Taccino was founded on a simple belief: great coffee deserves great technology. We blend the art of traditional espresso craft with the intelligence of AI to create an experience that is wholly personal, effortlessly elegant.</p>
+        <p class="about-desc">From the beans we source to the algorithms that learn your taste — every detail is curated for you.</p>
+      </div>
+      <div class="about-stat-grid">
+        <div class="stat-card">
+          <span class="stat-num">12+</span>
+          <span class="stat-label">Signature Blends</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">98%</span>
+          <span class="stat-label">Happy Guests</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">AI</span>
+          <span class="stat-label">Powered Waiter</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">∞</span>
+          <span class="stat-label">Moments Created</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════ FOOTER ════════════════ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-icon">☕</span>
+        <span class="brand-name">Taccino</span>
+        <p>Where every sip tells a story.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact</a>
+      </div>
+      <p class="footer-copy">© 2026 Taccino. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ════════════════ CART DRAWER ════════════════ -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+    <div class="cart-header">
+      <h3>Your Order</h3>
+      <button class="cart-close" id="cartClose" aria-label="Close cart">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty" id="cartEmpty">
+        <span>☕</span>
+        <p>Your cup is empty.<br />Add something delightful!</p>
+      </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+      <div class="cart-total-row">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">₹0</span>
+      </div>
+      <div class="cart-total-row cart-total-main">
+        <span>Total</span>
+        <span id="cartTotal">₹0</span>
+      </div>
+      <button class="btn btn-primary btn-full" id="placeOrderBtn">Place Order</button>
+    </div>
+  </aside>
+
+  <!-- ════════════════ AI CHAT ════════════════ -->
+  <div class="chat-bubble" id="chatBubble" aria-label="Open AI Waiter chat">
+    <span class="chat-bubble-icon">✦</span>
+    <span class="chat-bubble-label">AI Waiter</span>
+  </div>
+
+  <div class="chat-panel" id="chatPanel" aria-label="AI Waiter chat panel">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-avatar">✦</div>
+        <div>
+          <p class="chat-name">Aria</p>
+          <p class="chat-status">AI Waiter · Online</p>
+        </div>
+      </div>
+      <button class="chat-close" id="chatClose" aria-label="Close chat">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="quick-replies" id="quickReplies">
+      <button class="qr-btn" data-msg="I'm feeling tired">😴 Tired</button>
+      <button class="qr-btn" data-msg="I'm feeling happy">😊 Happy</button>
+      <button class="qr-btn" data-msg="I need focus">🧠 Focus</button>
+      <button class="qr-btn" data-msg="Something sweet please">🍬 Sweet</button>
+      <button class="qr-btn" data-msg="What's your specialty?">⭐ Specialty</button>
+    </div>
+    <div class="chat-input-row">
+      <button class="voice-btn" id="voiceBtn" aria-label="Voice input" title="Voice input (UI simulation)">
+        <span class="mic-icon" id="micIcon">🎙</span>
+      </button>
+      <input type="text" class="chat-input" id="chatInput" placeholder="Ask anything…" autocomplete="off" />
+      <button class="chat-send" id="chatSend" aria-label="Send message">↑</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
